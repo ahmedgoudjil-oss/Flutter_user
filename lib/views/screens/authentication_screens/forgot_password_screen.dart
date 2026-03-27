@@ -13,7 +13,7 @@ class ForgotPasswordScreen extends ConsumerStatefulWidget {
 class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final AuthController _authController = AuthController();
+  final authController _authController = authController();
   bool _isLoading = false;
 
   @override

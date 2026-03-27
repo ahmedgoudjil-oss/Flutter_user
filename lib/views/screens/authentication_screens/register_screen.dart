@@ -28,10 +28,10 @@ class RegisterScreen extends ConsumerStatefulWidget {
 class _RegisterScreenState extends ConsumerState<RegisterScreen>
     with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final AuthController _authController = AuthController();
-  String email = '';
-  String fullName = '';
-  String password = '';
+  final authController _authController = authController();
+  late String email;
+  late String fullName;
+  late String password;
   bool isLoading = false;
   bool _obscurePassword = true;
 
@@ -44,6 +44,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
   void initState() {
     super.initState();
 
+    // Set system UI overlay style
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -53,6 +54,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
       ),
     );
 
+    // Initialize animations
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
@@ -72,6 +74,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
           CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
         );
 
+    // Start animations
     _fadeController.forward();
     _slideController.forward();
   }
@@ -83,56 +86,21 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
     super.dispose();
   }
 
-  Future<void> registerUser() async {
+  registerUser() async {
     setState(() {
       isLoading = true;
     });
 
-    final isSuccess = await _authController.signUpUsers(
+    await _authController.signUpUsers(
       context: context,
-      fullName: fullName.trim(),
-      email: email.trim(),
+      fullName: fullName,
+      email: email,
       password: password,
     );
 
-    if (!mounted) return;
-
-    if (isSuccess) {
-      await showVerifyEmailDialog(context);
-
-      if (!mounted) return;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
-    }
-
-    if (!mounted) return;
     setState(() {
       isLoading = false;
     });
-  }
-
-  Future<void> showVerifyEmailDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Verify Your Email'),
-          content: const Text(
-              'Your account has been created. Please check your email and verify it before logging in.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override

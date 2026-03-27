@@ -13,9 +13,8 @@ class UserProvider extends StateNotifier<User?> {
           state: "",
           city: "",
           locality: "",
-          
+          password: "",
           token: "",
-          
         ),
       );
   //getter method to extract value from object
@@ -46,9 +45,8 @@ void recreateUserState({
     state: state,
     city: city,
     locality: locality,
-    
+    password: this.state!.password,
     token: this.state!.token,
-    
   );
   }
 

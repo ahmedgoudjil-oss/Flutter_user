@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:untitled/controllers/auth_controller.dart' show AuthController;
+import 'package:untitled/controllers/auth_controller.dart';
 import 'package:untitled/views/screens/authentication_screens/register_screen.dart';
 import 'package:untitled/views/screens/authentication_screens/forgot_password_screen.dart';
 
@@ -29,7 +29,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen>
     with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final AuthController _authController = AuthController();
+  final authController _authController = authController();
   late String email;
   late String password;
   bool isLoading = false;

@@ -1,3 +1,10 @@
+buildscript {
+    repositories {
+        google()       // لازم موجود
+        mavenCentral() // لازم موجود
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -5,6 +12,7 @@ allprojects {
     }
 }
 
+// تغيير مكان بناء المشروع (اختياري حسب إعدادك)
 val newBuildDir: Directory =
     rootProject.layout.buildDirectory
         .dir("../../build")
@@ -14,8 +22,6 @@ rootProject.layout.buildDirectory.value(newBuildDir)
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
-}
-subprojects {
     project.evaluationDependsOn(":app")
 }
 

@@ -43,7 +43,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen>
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _localityController = TextEditingController();
-  final AuthController _authController = AuthController();
+  final authController _authController = authController();
   String shippingMethod = 'Deliver to your address';
   String paymentMethod = 'Cash on Delivery';
   late AnimationController _controller;

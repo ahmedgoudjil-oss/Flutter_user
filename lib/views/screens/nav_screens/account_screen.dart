@@ -39,7 +39,7 @@ class AccountScreen extends ConsumerStatefulWidget {
 
 class _AccountScreenState extends ConsumerState<AccountScreen>
     with TickerProviderStateMixin {
-  final AuthController _authController = AuthController();
+  final authController _authController = authController();
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
